@@ -1,0 +1,24 @@
+name: Code Analysis
+
+on: [push, pull_request]
+
+jobs:
+  security:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+
+    - name: Install dependencies
+      run: |
+        pip install bandit flake8
+
+    - name: Run Bandit
+      run: bandit -r .
+
+    - name: Run Flake8
+      run: flake8 .
