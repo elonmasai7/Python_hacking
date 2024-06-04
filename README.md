@@ -1,4 +1,3 @@
-Sure, here’s a comprehensive README for the project, customized for you:
 Codebase Security and Quality Checker
 Overview
 
