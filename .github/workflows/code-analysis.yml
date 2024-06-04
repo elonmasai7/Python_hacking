@@ -1,0 +1,37 @@
+name: Code Analysis
+
+on: [push, pull_request]
+
+jobs:
+  security:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+
+    - name: Install dependencies
+      run: |
+        pip install bandit flake8 pylint
+
+    - name: Run Bandit
+      run: bandit -r .
+
+    - name: Run Flake8
+      run: flake8 .
+
+    - name: Run Pylint
+      run: pylint $(find . -name "*.py" | xargs)
+
+    - name: Run SonarQube
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      run: |
+        sonar-scanner \
+          -Dsonar.projectKey=myproject \
+          -Dsonar.sources=. \
+          -Dsonar.host.url=http://localhost:9000 \
+          -Dsonar.login=$SONAR_TOKEN
