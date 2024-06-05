@@ -1,37 +1,15 @@
 import requests
 
-from bs4 import BeautifulSoup
-
-def scrape_blog(url):
-
+def fetch_url(url):
     try:
-
-        response = requests.get(url)
-
-        response.raise_for_status()
-
+        response = requests.get(url, timeout=10)  # Add a timeout to the request
+        return response.text
     except requests.exceptions.RequestException as e:
-
-        print(f"Failed to retrieve the page: {e}")
-
-        return
-
-    soup = BeautifulSoup(response.text, 'html.parser')
-
-    articles = soup.find_all('h2')  # Assuming article titles are in <h2> tags
-
-    if articles:
-
-        for article in articles:
-
-            print(article.get_text())
-
-    else:
-
-        print("No article titles found on the page.")
+        print(f"An error occurred: {e}")
+        return None
 
 if __name__ == "__main__":
-
-    url = input("Enter the URL of the blog: ")
-
-    scrape_blog(url)
+    url = "your_url_here"  # Replace with the actual URL
+    content = fetch_url(url)
+    if content:
+        print(content)
