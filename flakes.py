@@ -1,3 +1,4 @@
+# flakes.py
 import subprocess
 import shlex
 
@@ -17,7 +18,9 @@ def run_pylint(sanitized_path):
     print(result.stdout)
 
 # Example usage
-sanitized_path = shlex.quote('/path/to/your/code')
-run_bandit(sanitized_path)
-run_flake8(sanitized_path)
-run_pylint(sanitized_path)
+if __name__ == '__main__':
+    path = 'path/to/code'  # replace with the actual path
+    sanitized_path = shlex.quote(path)
+    run_bandit(sanitized_path)
+    run_flake8(sanitized_path)
+    run_pylint(sanitized_path)
