@@ -6,6 +6,13 @@ def run_bandit(sanitized_path):
     result = subprocess.run(command, capture_output=True, text=True, check=True)
     print(result.stdout)
 
+def sanitize_path(path):
+    if not os.path.isabs(path):
+        raise ValueError("The path must be absolute.")
+    return os.path.normpath(path)
+
+
+sanitized_path = sanitize_path(user_input_path)
 def run_flake8(sanitized_path):
     command = ['/usr/local/bin/flake8', sanitized_path]
     result = subprocess.run(command, capture_output=True, text=True, check=True)
