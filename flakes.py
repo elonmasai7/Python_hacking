@@ -16,3 +16,4 @@ def run_pylint(sanitized_path):
     command = ['/usr/local/bin/pylint', sanitized_path]
     result = subprocess.run(command, capture_output=True, text=True, check=True)
     print(result.stdout)
+#Elon masai
