@@ -1,18 +1,17 @@
 import subprocess
-import shlex
+import os
 
-
-def run_bandit(sanitized_path):
-    command = ['/usr/local/bin/bandit', '-r', sanitized_path]
-    result = subprocess.run(command, capture_output=True, text=True, check=True)
+def run_bandit(path):
+    print(f"Running Bandit on {path}")
+    result = subprocess.run(['/usr/local/bin/bandit', '-r', path], capture_output=True, text=True)
     print(result.stdout)
 
-def run_flake8(sanitized_path):
-    command = ['/usr/local/bin/flake8', sanitized_path]
-    result = subprocess.run(command, capture_output=True, text=True, check=True)
+def run_flake8(path):
+    print(f"Running Flake8 on {path}")
+    result = subprocess.run(['/usr/local/bin/flake8', path], capture_output=True, text=True)
     print(result.stdout)
 
-def run_pylint(sanitized_path):
-    command = ['/usr/local/bin/pylint', sanitized_path]
-    result = subprocess.run(command, capture_output=True, text=True, check=True)
+def run_pylint(path):
+    print(f"Running Pylint on {path}")
+    result = subprocess.run(['/usr/local/bin/pylint', path], capture_output=True, text=True)
     print(result.stdout)
