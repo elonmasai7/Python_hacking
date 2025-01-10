@@ -14,4 +14,4 @@ def run_pylint(path):
     print(f"Running Pylint on {path}")
     result = subprocess.run(['/usr/local/bin/pylint', path], capture_output=True, text=True, shell=False)
     print(result.stdout)
-#masai
+
